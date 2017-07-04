@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
+    /**
+     * @covers \AppBundle\Controller\DefaultController::indexAction
+     */
     public function testIndex()
     {
         $client = static::createClient();
@@ -13,6 +16,6 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        $this->assertEquals('Success', $crawler->text());
     }
 }

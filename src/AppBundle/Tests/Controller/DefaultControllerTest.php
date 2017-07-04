@@ -7,37 +7,79 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class DefaultControllerTest extends WebTestCase
 {
     /**
-     * @dataProvider getDataProvider
+     * @dataProvider getValidDataProvider
      * @param array  $params
-     * @param string $text
-     * @param int    $code
      */
-    public function testIndex(array $params, $text, $code)
+    public function testFormValid(array $params)
     {
         $client = static::createClient();
 
-        $crawler = $client->request('POST', '/', $params);
+        $crawler = $client->request('POST', '/form', $params);
 
-        $this->assertEquals($code, $client->getResponse()->getStatusCode());
-        $this->assertEquals($text, $crawler->text());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals('Success', $crawler->text());
+    }
+    /**
+     * @dataProvider getValidDataProvider
+     * @param array  $params
+     */
+    public function testYamlValid(array $params)
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('POST', '/yaml', $params);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals('Success', $crawler->text());
     }
 
-    public function getDataProvider()
+    /**
+     * @dataProvider getInvalidDataProvider
+     * @param array  $params
+     */
+    public function testFormInvalid(array $params)
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('POST', '/form', $params);
+
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+        $this->assertEquals('[{"age":"This value should be greater than 18."}]', $crawler->text());
+    }
+    /**
+     * @dataProvider getInvalidDataProvider
+     * @param array  $params
+     */
+    public function testYamlInvalid(array $params)
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('POST', '/yaml', $params);
+
+        $this->assertEquals(400, $client->getResponse()->getStatusCode());
+        $this->assertEquals('[{"age":"This value should be greater than 18."}]', $crawler->text());
+    }
+
+    public function getValidDataProvider()
     {
         return [
             [
                 [
                     'name' => 'Some user name',
+                    'age' => 19,
                 ],
-                'Success',
-                200,
             ],
+        ];
+    }
+
+    public function getInvalidDataProvider()
+    {
+        return [
             [
                 [
-                    'not_name' => 'Some other value',
+                    'name' => 'Some user name',
+                    'age' => 17,
                 ],
-                'Error',
-                400,
             ],
         ];
     }

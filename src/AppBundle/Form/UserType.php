@@ -4,9 +4,11 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserType extends AbstractType
@@ -17,6 +19,12 @@ class UserType extends AbstractType
             ->add('name', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
+                ],
+            ])
+            ->add('age', IntegerType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                    new GreaterThan(['value' => 18]),
                 ],
             ])
         ;

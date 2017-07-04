@@ -1,0 +1,24 @@
+# https://hub.docker.com/r/tianon/true/
+application:
+  image: tianon/true
+  container_name: symfony-test-app
+  volumes:
+      - .:/var/www/symfony
+# https://hub.docker.com/_/php/
+php-fpm:
+  image: php:7-fpm
+  container_name: symfony-test-fpm
+  volumes_from:
+      - application
+# https://hub.docker.com/_/nginx/
+nginx:
+  image: nginx:1.13.1-alpine
+  container_name: symfony-test-nginx
+  ports:
+      - 8001:80
+  links:
+      - php-fpm
+  volumes_from:
+      - application
+  volumes:
+      - ./nginx-conf/default.conf:/etc/nginx/conf.d/default.conf:ro

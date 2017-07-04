@@ -2,3 +2,6 @@ AppBundle\Entity\User:
     properties:
         name:
             - NotBlank: ~
+        age:
+            - NotBlank: ~
+            - GreaterThan: 18

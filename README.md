@@ -2,8 +2,8 @@
 
 ![Symfony version](https://img.shields.io/badge/Symfony-2.8-green.svg?style=plastic)
 
-## How to init a new Symfony project
+## How to run tests
 
 ```bash
-$ symfony new SymfonyTest [<version>]
+$ composer exec phpunit -- -c app
 ```

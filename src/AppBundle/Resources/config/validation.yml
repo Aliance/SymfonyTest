@@ -1,0 +1,4 @@
+AppBundle\Entity\Category:
+    properties:
+        name:
+            - NotBlank: ~

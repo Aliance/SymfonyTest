@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolationList;
 
 class DefaultController extends Controller
@@ -37,7 +38,11 @@ class DefaultController extends Controller
             $category->name = $request->get('name');
         }
 
-        $errors = $this->get('validator')->validate($category);
+        if ($request->get('modifier')) {
+            $category->modifier = $request->get('modifier');
+        }
+
+        $errors = $this->get('validator')->validate($category, null, [Constraint::DEFAULT_GROUP, 'modify']);
 
         if (count($errors)) {
             return new Response($this->getErrors($errors), 400);
@@ -56,6 +61,7 @@ class DefaultController extends Controller
     {
         $form = $this->get('form.factory')->createNamed('', UserType::class, null, [
             'method' => $request->getMethod(),
+            'validation_groups' => [Constraint::DEFAULT_GROUP, 'modify'],
         ]);
         $form->handleRequest($request);
 

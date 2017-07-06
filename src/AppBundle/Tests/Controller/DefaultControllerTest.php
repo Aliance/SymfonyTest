@@ -39,18 +39,36 @@ class DefaultControllerTest extends WebTestCase
     public function getCategoryDataProvider()
     {
         return [
-            'valid' => [
+            'category:valid' => [
                 [
                     'name' => 'Some category name',
+                    'modifier' => 'Some modifier',
                 ],
                 'Success',
                 200,
             ],
-            'empty_name' => [
+            'category:empty_name' => [
                 [
                     'name' => '',
+                    'modifier' => 'Some modifier',
                 ],
                 'This value should not be blank.',
+                400,
+            ],
+            'category:empty_modifier' => [
+                [
+                    'name' => 'Some category name',
+                    'modifier' => '',
+                ],
+                'This value should not be blank.',
+                400,
+            ],
+            'category:empty_fields' => [
+                [
+                    'name' => '',
+                    'modifier' => '',
+                ],
+                'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
                 400,
             ],
         ];
@@ -76,18 +94,36 @@ class DefaultControllerTest extends WebTestCase
     public function getUserDataProvider()
     {
         return [
-            'valid' => [
+            'user:valid' => [
                 [
                     'name' => 'Some user name',
+                    'modifier' => 'Some modifier',
                 ],
                 'Success',
                 200,
             ],
-            'empty_name' => [
+            'user:empty_name' => [
                 [
                     'name' => '',
+                    'modifier' => 'Some modifier',
                 ],
                 'This value should not be blank.',
+                400,
+            ],
+            'user:empty_modifier' => [
+                [
+                    'name' => 'Some user name',
+                    'modifier' => '',
+                ],
+                'This value should not be blank.',
+                400,
+            ],
+            'user:empty_fields' => [
+                [
+                    'name' => '',
+                    'modifier' => '',
+                ],
+                'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
                 400,
             ],
         ];

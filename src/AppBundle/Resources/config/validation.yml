@@ -2,3 +2,5 @@ AppBundle\Entity\Category:
     properties:
         name:
             - NotBlank: ~
+        modifier:
+            - NotBlank: { groups: [modify] }

@@ -20,6 +20,11 @@ class UserType extends AbstractType
                     new NotBlank(),
                 ],
             ])
+            ->add('modifier', TextType::class, [
+                'constraints' => [
+                    new NotBlank(['groups' => ['modify']]),
+                ],
+            ])
         ;
     }
 

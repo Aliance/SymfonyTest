@@ -7,4 +7,6 @@ class Category
     public $name;
 
     public $modifier;
+
+    public $info;
 }

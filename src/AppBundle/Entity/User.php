@@ -7,4 +7,6 @@ class User
     public $name;
 
     public $modifier;
+
+    public $info;
 }

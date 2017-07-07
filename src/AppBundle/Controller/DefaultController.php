@@ -15,6 +15,12 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 class DefaultController extends Controller
 {
+    private $groups = [
+        Constraint::DEFAULT_GROUP,
+        'modify',
+        'info',
+    ];
+
     /**
      * @Route("/", name="homepage")
      * @return Response
@@ -42,7 +48,11 @@ class DefaultController extends Controller
             $category->modifier = $request->get('modifier');
         }
 
-        $errors = $this->get('validator')->validate($category, null, [Constraint::DEFAULT_GROUP, 'modify']);
+        if ($request->get('info')) {
+            $category->info = $request->get('info');
+        }
+
+        $errors = $this->get('validator')->validate($category, $this->groups);
 
         if (count($errors)) {
             return new Response($this->getErrors($errors), 400);
@@ -61,7 +71,7 @@ class DefaultController extends Controller
     {
         $form = $this->get('form.factory')->createNamed('', UserType::class, null, [
             'method' => $request->getMethod(),
-            'validation_groups' => [Constraint::DEFAULT_GROUP, 'modify'],
+            'validation_groups' => $this->groups,
         ]);
         $form->handleRequest($request);
 

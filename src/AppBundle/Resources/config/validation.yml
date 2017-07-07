@@ -4,3 +4,10 @@ AppBundle\Entity\Category:
             - NotBlank: ~
         modifier:
             - NotBlank: { groups: [modify] }
+        info:
+            - Collection:
+                fields:
+                    id:
+                        - Optional: ~
+                    title:
+                        - AppBundle\Validator\Constraints\NonLatin: { groups: [info] }

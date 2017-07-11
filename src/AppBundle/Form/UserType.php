@@ -3,13 +3,13 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
-use AppBundle\Validator\Constraints\NonLatin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Optional;
 
 class UserType extends AbstractType
 {
@@ -33,7 +33,13 @@ class UserType extends AbstractType
                     ->add('id', TextType::class)
                     ->add('title', TextType::class, [
                         'constraints' => [
-                            new NonLatin(['groups' => ['info']]),
+                            new NotBlank(['groups' => ['info']]),
+                        ],
+                    ])
+                    ->add('text', TextType::class, [
+                        'constraints' => [
+                            new Optional(),
+//                            new NotBlank(),
                         ],
                     ])
             )

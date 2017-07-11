@@ -10,4 +10,9 @@ AppBundle\Entity\Category:
                     id:
                         - Optional: ~
                     title:
-                        - AppBundle\Validator\Constraints\NonLatin: { groups: [info] }
+                        - Optional:
+                            - NotBlank:
+                                groups: [ info ]
+                    text:
+                        - Optional:
+                            - NotBlank: ~

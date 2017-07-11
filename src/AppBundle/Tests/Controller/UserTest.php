@@ -30,6 +30,7 @@ class UserTest extends WebTestCase
                     'modifier' => 'Some modifier',
                     'info' => [
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
             ],
@@ -62,6 +63,7 @@ class UserTest extends WebTestCase
                     'modifier' => 'Some modifier',
                     'info' => [
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -73,6 +75,7 @@ class UserTest extends WebTestCase
                     'modifier' => '',
                     'info' => [
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -84,20 +87,33 @@ class UserTest extends WebTestCase
                     'modifier' => '',
                     'info' => [
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
                 400,
             ],
-            'user:invalid_info' => [
+            'user:invalid_info:empty_title' => [
                 [
                     'name' => 'Some category name',
                     'modifier' => 'Some modifier',
                     'info' => [
-                        'title' => 'Не latin-1 текст.',
+                        'title' => '',
+                        'text' => 'Some text',
                     ],
                 ],
-                'The value "Не latin-1 текст." must contain only Latin characters.',
+                'This value should not be blank.',
+                400,
+            ],
+            'user:invalid_info:empty_title_without_text' => [
+                [
+                    'name' => 'Some category name',
+                    'modifier' => 'Some modifier',
+                    'info' => [
+                        'title' => '',
+                    ],
+                ],
+                'This value should not be blank.',
                 400,
             ],
         ];

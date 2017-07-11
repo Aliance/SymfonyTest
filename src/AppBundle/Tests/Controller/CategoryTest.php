@@ -4,6 +4,12 @@ namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class CategoryTest
+ * @package AppBundle\Tests\Controller
+ *
+ * https://symfony.com/doc/current/reference/constraints/Collection.html
+ */
 class CategoryTest extends WebTestCase
 {
     /**
@@ -31,6 +37,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
             ],
@@ -64,6 +71,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -76,6 +84,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -88,21 +97,35 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
                 400,
             ],
-            'category:invalid_info' => [
+            'category:invalid_info:empty_title' => [
                 [
                     'name' => 'Some category name',
                     'modifier' => 'Some modifier',
                     'info' => [
                         'id' => 100500,
-                        'title' => 'Не latin-1 текст.',
+                        'title' => '',
+                        'text' => 'Some text',
                     ],
                 ],
-                'The value "Не latin-1 текст." must contain only Latin characters.',
+                'This value should not be blank.',
+                400,
+            ],
+            'category:invalid_info:empty_title_without_text' => [
+                [
+                    'name' => 'Some category name',
+                    'modifier' => 'Some modifier',
+                    'info' => [
+                        'id' => 100500,
+                        'title' => '',
+                    ],
+                ],
+                'This value should not be blank.',
                 400,
             ],
         ];

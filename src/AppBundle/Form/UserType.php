@@ -41,6 +41,14 @@ class UserType extends AbstractType
                             ]),
                         ],
                     ])
+                    ->add('text', TextType::class, [
+                        'constraints' => [
+                            new Length([
+                                'min' => 3,
+                                'max' => 25,
+                            ]),
+                        ],
+                    ])
             )
         ;
     }

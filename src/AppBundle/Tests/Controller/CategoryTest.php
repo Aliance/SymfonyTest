@@ -37,6 +37,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
             ],
@@ -70,6 +71,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -82,6 +84,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -94,6 +97,7 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => 'Some info title',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
@@ -106,6 +110,19 @@ class CategoryTest extends WebTestCase
                     'info' => [
                         'id' => 100500,
                         'title' => '1',
+                    ],
+                ],
+                'This value is too short. It should have 3 characters or more.',
+                400,
+            ],
+            'category:invalid_info:short_title_with_some_text' => [
+                [
+                    'name' => 'Some category name',
+                    'modifier' => 'Some modifier',
+                    'info' => [
+                        'id' => 100500,
+                        'title' => '1',
+                        'text' => 'Some text',
                     ],
                 ],
                 'This value is too short. It should have 3 characters or more.',

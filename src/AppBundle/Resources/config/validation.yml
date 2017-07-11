@@ -15,3 +15,8 @@ AppBundle\Entity\Category:
                                 min: 3
                                 max: 25
                                 groups: [ info ]
+                    text:
+                        - Optional:
+                            - Length:
+                                min: 3
+                                max: 25

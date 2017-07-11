@@ -29,8 +29,8 @@ class UserTest extends WebTestCase
                     'name' => 'Some user name',
                     'modifier' => 'Some modifier',
                     'info' => [
+                        'id' => 100500,
                         'title' => 'Some info title',
-                        'text' => 'Some text',
                     ],
                 ],
             ],
@@ -62,8 +62,8 @@ class UserTest extends WebTestCase
                     'name' => '',
                     'modifier' => 'Some modifier',
                     'info' => [
+                        'id' => 100500,
                         'title' => 'Some info title',
-                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -74,8 +74,8 @@ class UserTest extends WebTestCase
                     'name' => 'Some user name',
                     'modifier' => '',
                     'info' => [
+                        'id' => 100500,
                         'title' => 'Some info title',
-                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.',
@@ -86,34 +86,23 @@ class UserTest extends WebTestCase
                     'name' => '',
                     'modifier' => '',
                     'info' => [
+                        'id' => 100500,
                         'title' => 'Some info title',
-                        'text' => 'Some text',
                     ],
                 ],
                 'This value should not be blank.' . PHP_EOL . 'This value should not be blank.',
                 400,
             ],
-            'user:invalid_info:empty_title' => [
+            'user:invalid_info:short_title' => [
                 [
                     'name' => 'Some category name',
                     'modifier' => 'Some modifier',
                     'info' => [
-                        'title' => '',
-                        'text' => 'Some text',
+                        'id' => 100500,
+                        'title' => '1',
                     ],
                 ],
-                'This value should not be blank.',
-                400,
-            ],
-            'user:invalid_info:empty_title_without_text' => [
-                [
-                    'name' => 'Some category name',
-                    'modifier' => 'Some modifier',
-                    'info' => [
-                        'title' => '',
-                    ],
-                ],
-                'This value should not be blank.',
+                'This value is too short. It should have 3 characters or more.',
                 400,
             ],
         ];

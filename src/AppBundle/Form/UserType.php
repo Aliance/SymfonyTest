@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Optional;
 
@@ -33,13 +34,11 @@ class UserType extends AbstractType
                     ->add('id', TextType::class)
                     ->add('title', TextType::class, [
                         'constraints' => [
-                            new NotBlank(['groups' => ['info']]),
-                        ],
-                    ])
-                    ->add('text', TextType::class, [
-                        'constraints' => [
-                            new Optional(),
-//                            new NotBlank(),
+                            new Length([
+                                'min' => 3,
+                                'max' => 25,
+                                'groups' => ['info'],
+                            ]),
                         ],
                     ])
             )

@@ -8,8 +8,10 @@
 $ composer create-project symfony/skeleton SymfonyTest [<version>]
 ```
 
-## How to init a new Symfony 2.x / 3.x project
+## How to run a project
 
 ```bash
-$ symfony new SymfonyTest [<version>]
+$ php -S 127.0.0.1:8000 -t public
 ```
+
+And open [http://127.0.0.1:8000](http://127.0.0.1:8000)
